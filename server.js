@@ -2,6 +2,9 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+//allows us to use with heroku or locally
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 //set up partials for use
@@ -59,6 +62,8 @@ app.get('/', (req, res) => {
   //   ],
   // });
 
+  //use render to render templates
+  //2nd obj arg is for data we want to inject into template
   res.render('home.hbs', {
     pageTitle: 'Home Page',
     welcomeMsg: 'Welcome to the home page!'
@@ -66,8 +71,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  //use render to render templates
-  //2nd obj arg is for data we want to inject into template
   res.render('about.hbs', {
     pageTitle: 'About Page',
   });
@@ -80,6 +83,6 @@ app.get('/bad', (req, res) => {
 });
 
 //binds a port to our machine
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
